@@ -8,6 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <style>
 :root{
   --red:#D7261E;
@@ -289,6 +291,21 @@ footer a:hover{color:var(--gold)}
 .pay-opt .ic{width:42px;height:42px;margin:0 auto 8px;border-radius:11px;background:var(--cream);color:var(--red);display:grid;place-items:center}
 .pay-opt b{display:block;font-size:15px}
 .pay-opt small{color:var(--ink-soft);font-size:12.5px}
+/* delivery address finder */
+.addr-wrap{position:relative}
+.addr-row{display:flex;gap:8px}
+.addr-row input{flex:1}
+.geo-btn{min-height:46px;padding:0 12px;border-radius:11px;background:var(--ink);color:#fff;font-weight:700;font-size:13px;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+.geo-btn:active{transform:translateY(1px)}
+.addr-suggest{position:absolute;left:0;right:0;top:100%;z-index:30;background:#fff;border:1.5px solid var(--line);border-radius:12px;margin-top:4px;box-shadow:var(--shadow);max-height:220px;overflow-y:auto;display:none}
+.addr-suggest.show{display:block}
+.addr-suggest button{display:block;width:100%;text-align:left;padding:11px 13px;font-size:14px;border-bottom:1px solid var(--line);line-height:1.3}
+.addr-suggest button:last-child{border-bottom:none}
+.addr-suggest button:hover,.addr-suggest button:focus-visible{background:var(--cream)}
+.delivery-map{height:220px;border-radius:12px;margin-top:10px;border:1.5px solid var(--line);overflow:hidden;background:#e9e6df}
+.delivery-map .leaflet-container{height:100%;width:100%;font-family:inherit}
+.addr-status{font-size:13px;color:var(--ink-soft);margin-top:6px;min-height:18px}
+.addr-status.ok{color:var(--green);font-weight:600}
 .card-fields{display:none;animation:fade .25s}
 .card-fields.show{display:block}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
@@ -577,7 +594,23 @@ footer a:hover{color:var(--gold)}
           <div class="field" id="c-nome"><label>Nome <span class="req">*</span></label><input type="text" id="co-nome" autocomplete="name"><div class="err-msg">Campo obbligatorio</div></div>
           <div class="field" id="c-tel"><label>Telefono <span class="req">*</span></label><input type="tel" id="co-tel" inputmode="tel" autocomplete="tel"><div class="err-msg">Telefono non valido</div></div>
         </div>
-        <div class="field" id="c-ind" hidden><label>Indirizzo di consegna <span class="req">*</span></label><input type="text" id="co-ind" autocomplete="street-address"><div class="err-msg">Inserisci l'indirizzo</div></div>
+        <div class="field" id="c-ind" hidden>
+          <label>Indirizzo di consegna <span class="req">*</span></label>
+          <div class="addr-wrap">
+            <div class="addr-row">
+              <input type="text" id="co-ind" autocomplete="off" placeholder="Digita via e numero civico..." aria-describedby="addrStatus">
+              <button type="button" class="geo-btn" id="geoBtn" title="Usa la mia posizione">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+                Posizione
+              </button>
+            </div>
+            <div class="addr-suggest" id="addrSuggest" role="listbox" aria-label="Suggerimenti indirizzo"></div>
+          </div>
+          <div class="err-msg">Inserisci e seleziona l'indirizzo</div>
+          <div class="delivery-map" id="deliveryMap"></div>
+          <div class="addr-status" id="addrStatus">Digita il tuo indirizzo o trascina il segnaposto sulla mappa.</div>
+          <input type="hidden" id="co-lat"><input type="hidden" id="co-lng">
+        </div>
         <div class="field"><label>Orario di ritiro/consegna</label>
           <select id="co-ora"><option>Il prima possibile</option><option>12:30</option><option>13:00</option><option>13:30</option><option>19:30</option><option>20:00</option><option>20:30</option><option>21:00</option></select></div>
 
@@ -826,6 +859,7 @@ function buildSummary(){
     +(orderType==='consegna'?`<div class="cs-row"><span>Consegna</span><span class="tnum">${eur(DELIVERY_FEE)}</span></div>`:'')
     +`<div class="cs-tot"><span>Totale (${orderType})</span><span class="tnum">${eur(total())}</span></div>`;
   $('#c-ind').hidden=orderType!=='consegna';
+  if(orderType==='consegna') showDeliveryMap();
 }
 $('#payCash').onclick=()=>{payMethod='cash';$('#payCash').setAttribute('aria-pressed',true);$('#payCard').setAttribute('aria-pressed',false);$('#cardFields').classList.remove('show');$('#payErr').classList.remove('show-err');$('#payErr').style.display='none';};
 $('#payCard').onclick=()=>{payMethod='card';$('#payCard').setAttribute('aria-pressed',true);$('#payCash').setAttribute('aria-pressed',false);$('#cardFields').classList.add('show');$('#payErr').style.display='none';};
@@ -856,12 +890,72 @@ $('#checkoutForm').addEventListener('submit',e=>{
     <h3>Ordine confermato!</h3>
     <p>Grazie ${nome.split(' ')[0]}. ${payTxt}.</p>
     <div class="code">${code}</div>
-    <p>Tipo: <b>${orderType==='consegna'?'Consegna a domicilio':'Ritiro / Asporto'}</b><br>Totale: <b>${eur(total())}</b></p>
+    <p>Tipo: <b>${orderType==='consegna'?'Consegna a domicilio':'Ritiro / Asporto'}</b>${orderType==='consegna'?'<br>Indirizzo: <b>'+($('#co-ind').value||'').replace(/</g,'&lt;')+'</b>':''}<br>Totale: <b>${eur(total())}</b></p>
     <p style="margin-top:14px">Ti chiamiamo al <b>${tel}</b> per confermare i tempi.</p>
     <button class="btn btn-red btn-block" style="margin-top:18px" onclick="location.reload()">Torna al menu</button>
   </div>`;
   cart=[];save();renderCart();
 });
+
+/* ============ DELIVERY ADDRESS + LIVE MAP (OpenStreetMap, no API key) ============ */
+let dMap=null,dMarker=null;
+const SAVONA=[44.3069,8.48008];
+function setAddrStatus(t,ok){const e=$('#addrStatus');if(!e)return;e.textContent=t;e.classList.toggle('ok',!!ok);}
+function setCoords(lat,lng){$('#co-lat').value=lat;$('#co-lng').value=lng;}
+function showDeliveryMap(){
+  if(typeof L==='undefined'){setAddrStatus('Mappa non disponibile ora: scrivi l\'indirizzo qui sopra.');return;}
+  if(!dMap){
+    dMap=L.map('deliveryMap',{scrollWheelZoom:false}).setView(SAVONA,14);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(dMap);
+    dMarker=L.marker(SAVONA,{draggable:true}).addTo(dMap);
+    const upd=(ll)=>{setCoords(ll.lat.toFixed(6),ll.lng.toFixed(6));reverseGeocode(ll.lat,ll.lng);};
+    dMarker.on('dragend',()=>upd(dMarker.getLatLng()));
+    dMap.on('click',e=>{dMarker.setLatLng(e.latlng);upd(e.latlng);});
+  }
+  setTimeout(()=>dMap.invalidateSize(),250);
+}
+async function reverseGeocode(lat,lng){
+  try{setAddrStatus('Ricerca indirizzo...');
+    const r=await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`,{headers:{'Accept-Language':'it'}});
+    const j=await r.json();
+    if(j&&j.display_name){$('#co-ind').value=j.display_name;setAddrStatus('Indirizzo selezionato dalla mappa ✓',true);}
+    else setAddrStatus('Posizione salvata. Controlla l\'indirizzo scritto.');
+  }catch(e){setAddrStatus('Posizione salvata sulla mappa. Verifica l\'indirizzo scritto.');}
+}
+let addrT;
+function addrSearch(q){
+  clearTimeout(addrT);
+  const box=$('#addrSuggest');
+  if(q.trim().length<4){box.classList.remove('show');return;}
+  addrT=setTimeout(async()=>{
+    try{
+      const r=await fetch(`https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&limit=6&countrycodes=it&q=${encodeURIComponent(q)}`,{headers:{'Accept-Language':'it'}});
+      const list=await r.json();
+      if(!list.length){box.classList.remove('show');return;}
+      box.innerHTML=list.map(it=>`<button type="button" data-lat="${it.lat}" data-lng="${it.lon}" data-name="${it.display_name.replace(/"/g,'&quot;')}">${it.display_name}</button>`).join('');
+      box.classList.add('show');
+      box.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+        $('#co-ind').value=b.dataset.name;setCoords(b.dataset.lat,b.dataset.lng);
+        box.classList.remove('show');setAddrStatus('Indirizzo selezionato ✓',true);
+        if(dMap){const ll=[+b.dataset.lat,+b.dataset.lng];dMap.setView(ll,17);dMarker.setLatLng(ll);}
+      });
+    }catch(e){box.classList.remove('show');setAddrStatus('Ricerca non disponibile: scrivi via, civico e città.');}
+  },450);
+}
+(function(){
+  const inp=$('#co-ind'); if(inp)inp.addEventListener('input',e=>addrSearch(e.target.value));
+  const gb=$('#geoBtn');
+  if(gb)gb.onclick=()=>{
+    if(!navigator.geolocation){setAddrStatus('Geolocalizzazione non supportata dal dispositivo.');return;}
+    setAddrStatus('Individuazione della tua posizione...');
+    navigator.geolocation.getCurrentPosition(p=>{
+      const lat=p.coords.latitude,lng=p.coords.longitude;setCoords(lat.toFixed(6),lng.toFixed(6));
+      if(typeof L!=='undefined'){showDeliveryMap();if(dMap){dMap.setView([lat,lng],17);dMarker.setLatLng([lat,lng]);}}
+      reverseGeocode(lat,lng);
+    },()=>setAddrStatus('Non riusciamo a trovare la posizione. Inserisci l\'indirizzo a mano.'),{enableHighAccuracy:true,timeout:8000});
+  };
+  document.addEventListener('click',e=>{const b=$('#addrSuggest');if(b&&!e.target.closest('.addr-wrap'))b.classList.remove('show');});
+})();
 
 /* ============ NAV (mobile + active link) ============ */
 $('#burger').onclick=function(){const n=$('#navLinks');const o=n.classList.toggle('open');this.setAttribute('aria-expanded',o);};
