@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ristorante Pizzeria Da Nicola | Savona dal 1956</title>
+<meta name="description" content="Da Nicola a Savona dal 1956. Cucina ligure e campana, pizza napoletana, pesce fresco. Ordina l'asporto, paga online o in contanti e prenota il tuo tavolo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#D7261E;
+  --red-dark:#9E140E;
+  --red-deep:#6E0D09;
+  --cream:#FFF7EE;
+  --paper:#FFFFFF;
+  --ink:#1C1413;
+  --ink-soft:#5A4D49;
+  --gold:#E8A33D;
+  --green:#1E8A4C;
+  --line:#EADCCB;
+  --shadow:0 18px 40px -18px rgba(40,10,5,.45);
+  --shadow-sm:0 8px 20px -12px rgba(40,10,5,.4);
+  --radius:18px;
+  --maxw:1180px;
+  --header-h:72px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+body{
+  font-family:'Manrope',system-ui,sans-serif;
+  color:var(--ink);
+  background:var(--cream);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+h1,h2,h3,h4{font-family:'Anton',sans-serif;font-weight:400;letter-spacing:.5px;line-height:.98;text-transform:uppercase}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+.accent{font-family:'Caveat',cursive;text-transform:none;color:var(--gold);font-weight:700}
+.tnum{font-variant-numeric:tabular-nums}
+
+/* ---------- Header ---------- */
+header.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(157,18,12,.96);
+  backdrop-filter:blur(8px);
+  color:#fff;
+  box-shadow:0 4px 20px -8px rgba(0,0,0,.5);
+}
+.nav-inner{height:var(--header-h);display:flex;align-items:center;gap:18px}
+.brand{display:flex;align-items:center;gap:12px;font-family:'Anton';font-size:22px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+.brand .mark{
+  width:42px;height:42px;border-radius:50%;background:var(--cream);color:var(--red-dark);
+  display:grid;place-items:center;font-size:20px;flex:none;box-shadow:inset 0 0 0 3px var(--gold);
+}
+.brand small{display:block;font-family:'Caveat';font-size:14px;color:var(--gold);letter-spacing:0;line-height:1}
+.nav-links{display:flex;gap:6px;margin-left:auto}
+.nav-links a{padding:10px 14px;border-radius:10px;font-weight:700;font-size:15px;transition:background .2s}
+.nav-links a:hover,.nav-links a:focus-visible{background:rgba(255,255,255,.16)}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:44px;padding:0 18px;border-radius:12px;font-weight:800;font-size:15px;
+  transition:transform .12s ease, box-shadow .2s, background .2s;white-space:nowrap;
+}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--gold);color:var(--ink);box-shadow:0 6px 0 #b9772a}
+.btn-primary:hover{filter:brightness(1.05)}
+.btn-ghost{background:rgba(255,255,255,.14);color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.4)}
+.btn-ghost:hover{background:rgba(255,255,255,.24)}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 6px 0 var(--red-deep)}
+.btn-red:hover{filter:brightness(1.06)}
+.btn-block{width:100%}
+.cart-btn{position:relative}
+.cart-count{
+  position:absolute;top:-8px;right:-8px;background:var(--gold);color:var(--ink);
+  min-width:22px;height:22px;border-radius:11px;font-size:12px;font-weight:800;
+  display:grid;place-items:center;padding:0 5px;box-shadow:0 0 0 2px var(--red-dark);
+}
+.cart-count[hidden]{display:none}
+.burger{display:none;width:46px;height:44px;border-radius:10px;background:rgba(255,255,255,.14);color:#fff;font-size:22px}
+
+/* ---------- Hero ---------- */
+.hero{
+  position:relative;color:#fff;overflow:hidden;
+  background:
+    radial-gradient(900px 500px at 80% -10%, rgba(232,163,61,.35), transparent 60%),
+    linear-gradient(160deg,var(--red-dark),var(--red-deep) 70%);
+}
+.hero::after{content:"";position:absolute;inset:0;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><circle cx="3" cy="3" r="1.2" fill="%23ffffff" opacity="0.05"/></svg>');opacity:.6}
+.hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding-top:64px;padding-bottom:76px}
+.hero .eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.3);padding:7px 14px;border-radius:30px;font-weight:700;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:18px}
+.hero h1{font-size:clamp(46px,7vw,88px);text-shadow:0 4px 0 rgba(0,0,0,.18)}
+.hero h1 .out{color:var(--gold)}
+.hero p.lead{font-size:18px;max-width:30ch;margin:18px 0 26px;color:#ffe9d6}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px}
+.hero-meta{display:flex;gap:22px;margin-top:30px;flex-wrap:wrap}
+.hero-meta div{font-size:14px;color:#ffd9bd}
+.hero-meta b{display:block;font-family:'Anton';font-size:26px;color:#fff;letter-spacing:1px}
+.hero-art{position:relative;height:420px;border-radius:24px;overflow:hidden;box-shadow:var(--shadow);transform:rotate(2deg)}
+.hero-art .media{height:100%}
+.hero-badge{
+  position:absolute;z-index:3;right:-6px;top:-22px;width:118px;height:118px;border-radius:50%;
+  background:var(--gold);color:var(--ink);display:grid;place-content:center;text-align:center;
+  font-family:'Anton';line-height:.95;transform:rotate(-12deg);box-shadow:var(--shadow-sm);border:4px solid #fff;
+}
+.hero-badge span{display:block}
+.hero-badge .big{font-size:34px;color:var(--red-dark)}
+
+/* ---------- Media / image fallback ---------- */
+.media{position:relative;background:linear-gradient(135deg,var(--g1,#b71d16),var(--g2,#7d0f0a));overflow:hidden;display:grid;place-items:center}
+.media .media-label{
+  position:absolute;inset:0;display:grid;place-content:center;text-align:center;padding:16px;
+  font-family:'Anton';color:rgba(255,255,255,.92);font-size:20px;letter-spacing:1px;text-transform:uppercase;line-height:1.05;
+}
+.media .media-label small{display:block;font-family:'Caveat';font-size:18px;color:var(--gold);text-transform:none;letter-spacing:0;margin-top:6px}
+.media img{position:relative;z-index:2;width:100%;height:100%;object-fit:cover}
+
+/* ---------- Sections ---------- */
+section{padding:74px 0}
+.section-head{text-align:center;max-width:680px;margin:0 auto 42px}
+.section-head .kick{color:var(--red);font-family:'Caveat';font-size:26px;font-weight:700}
+.section-head h2{font-size:clamp(34px,5vw,54px);margin:4px 0 12px}
+.section-head p{color:var(--ink-soft);font-size:17px}
+.bg-paper{background:var(--paper)}
+
+/* ---------- About ---------- */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.about-imgs{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:170px;gap:14px}
+.about-imgs .media{border-radius:14px;box-shadow:var(--shadow-sm)}
+.about-imgs .media:first-child{grid-row:span 2}
+.about-text h2{font-size:clamp(32px,4.5vw,50px);margin-bottom:8px}
+.about-text .sig{font-family:'Caveat';font-size:30px;color:var(--red);margin-top:18px}
+.feature-row{display:flex;gap:26px;margin-top:26px;flex-wrap:wrap}
+.feature-row div{flex:1;min-width:120px}
+.feature-row b{font-family:'Anton';font-size:30px;color:var(--red);display:block}
+
+/* ---------- Menu ---------- */
+.menu-tabs{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:38px}
+.menu-tabs button{
+  min-height:44px;padding:0 20px;border-radius:30px;font-weight:700;font-size:15px;
+  background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line);transition:.18s;
+}
+.menu-tabs button[aria-selected="true"]{background:var(--red);color:#fff;box-shadow:0 8px 18px -8px var(--red)}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.dish{
+  background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);
+  display:flex;flex-direction:column;transition:transform .18s, box-shadow .18s;border:1px solid var(--line);
+}
+.dish:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.dish .media{aspect-ratio:4/3}
+.dish-badge{position:absolute;z-index:3;top:12px;left:12px;background:var(--gold);color:var(--ink);font-weight:800;font-size:12px;letter-spacing:.5px;text-transform:uppercase;padding:5px 10px;border-radius:8px;box-shadow:var(--shadow-sm)}
+.dish-tag{position:absolute;z-index:3;top:12px;right:12px;background:rgba(0,0,0,.6);color:#fff;font-weight:700;font-size:11px;padding:5px 9px;border-radius:8px}
+.dish-body{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1}
+.dish-body h3{font-family:'Manrope';font-weight:800;text-transform:none;font-size:19px;letter-spacing:0;line-height:1.2}
+.dish-body p{color:var(--ink-soft);font-size:14.5px;margin:7px 0 16px;flex:1}
+.dish-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto}
+.price{font-family:'Anton';font-size:24px;color:var(--red-dark)}
+.price small{font-family:'Manrope';font-size:13px;color:var(--ink-soft);font-weight:600}
+.add{min-height:44px;padding:0 16px;border-radius:12px;background:var(--red);color:#fff;font-weight:800;box-shadow:0 4px 0 var(--red-deep);transition:.12s}
+.add:hover{filter:brightness(1.07)}
+.add:active{transform:translateY(2px);box-shadow:0 2px 0 var(--red-deep)}
+.menu-note{text-align:center;color:var(--ink-soft);font-size:14px;margin-top:30px}
+
+/* ---------- Booking ---------- */
+.booking{background:linear-gradient(160deg,var(--red-dark),var(--red-deep));color:#fff;position:relative;overflow:hidden}
+.booking::after{content:"";position:absolute;inset:0;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><circle cx="3" cy="3" r="1.2" fill="%23ffffff" opacity="0.05"/></svg>')}
+.booking .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.booking h2{font-size:clamp(34px,5vw,52px)}
+.booking .kick{color:var(--gold);font-family:'Caveat';font-size:26px}
+.booking p{color:#ffe1cc;margin:10px 0 18px;max-width:38ch}
+.book-perk{display:flex;align-items:center;gap:12px;margin:12px 0;font-weight:600}
+.book-perk .ic{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.14);display:grid;place-items:center;flex:none}
+.card-form{background:#fff;color:var(--ink);border-radius:22px;padding:30px;box-shadow:var(--shadow)}
+.card-form h3{font-size:26px;margin-bottom:6px}
+.field{margin-bottom:14px}
+.field label{display:block;font-weight:700;font-size:13.5px;margin-bottom:6px}
+.field .req{color:var(--red)}
+.field input,.field select,.field textarea{
+  width:100%;min-height:46px;padding:11px 13px;border-radius:11px;border:1.5px solid var(--line);
+  font-family:inherit;font-size:15px;background:var(--cream);color:var(--ink);transition:border .15s, box-shadow .15s;
+}
+.field textarea{min-height:80px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(215,38,30,.16)}
+.field-err input,.field-err select{border-color:var(--red)}
+.err-msg{color:var(--red);font-size:13px;margin-top:5px;font-weight:600;display:none}
+.field-err .err-msg{display:block}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-ok{display:none;background:#eafaf0;border:1.5px solid var(--green);color:#125e32;border-radius:12px;padding:14px;font-weight:600;margin-top:6px}
+.form-ok.show{display:block}
+
+/* ---------- Gallery ---------- */
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:14px}
+.gallery .g-item{position:relative;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-sm);cursor:pointer}
+.gallery .media{height:100%}
+.gallery .g-item img{transition:transform .4s}
+.gallery .g-item:hover img{transform:scale(1.07)}
+.gallery .g-item.tall{grid-row:span 2}
+.gallery .g-item.wide{grid-column:span 2}
+.g-cap{position:absolute;z-index:3;left:0;right:0;bottom:0;padding:14px;background:linear-gradient(transparent,rgba(0,0,0,.7));color:#fff;font-family:'Caveat';font-size:22px;font-weight:700}
+
+/* ---------- Contact ---------- */
+.contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:stretch}
+.info-card{background:#fff;border-radius:var(--radius);padding:28px;box-shadow:var(--shadow-sm);border:1px solid var(--line)}
+.info-row{display:flex;gap:14px;padding:14px 0;border-bottom:1px dashed var(--line)}
+.info-row:last-child{border-bottom:none}
+.info-row .ic{width:42px;height:42px;border-radius:11px;background:var(--cream);color:var(--red);display:grid;place-items:center;flex:none}
+.info-row b{display:block;font-family:'Manrope';font-weight:800}
+.info-row span{color:var(--ink-soft);font-size:15px}
+.hours-li{display:flex;justify-content:space-between;padding:6px 0;font-size:15px}
+.hours-li.closed{color:var(--red);font-weight:700}
+.socials{display:flex;gap:12px;margin-top:18px}
+.socials a{width:50px;height:50px;border-radius:13px;display:grid;place-items:center;color:#fff;transition:transform .15s}
+.socials a:hover{transform:translateY(-3px)}
+.s-fb{background:#1877F2}.s-ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#bc1888)}.s-wa{background:#25D366}
+.map-embed{position:relative;display:block;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);min-height:380px;border:1px solid var(--line)}
+.map-link img{width:100%;height:100%;min-height:380px;object-fit:cover;display:block;transition:transform .4s}
+.map-link:hover img{transform:scale(1.04)}
+.map-tag{position:absolute;left:14px;bottom:14px;z-index:2;display:inline-flex;align-items:center;gap:7px;
+  background:var(--red);color:#fff;font-weight:800;font-size:14px;padding:9px 14px;border-radius:12px;box-shadow:var(--shadow-sm)}
+.map-ph{width:100%;min-height:380px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#fff;cursor:pointer;
+  background:radial-gradient(600px 300px at 50% 0%,rgba(232,163,61,.25),transparent),linear-gradient(160deg,var(--red-dark),var(--red-deep));text-align:center;padding:24px}
+.map-ph b{font-family:'Anton';font-size:24px;letter-spacing:.5px}
+.map-ph span{color:#ffe1cc;font-size:15px}
+.map-ph .map-cta{margin-top:12px;background:var(--gold);color:var(--ink);font-weight:800;padding:10px 18px;border-radius:12px;font-size:14px}
+
+/* ---------- Footer ---------- */
+footer{background:var(--ink);color:#e9ddd4;padding:50px 0 26px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px}
+footer h4{color:#fff;font-family:'Anton';font-size:20px;margin-bottom:14px;letter-spacing:1px}
+footer a{display:block;color:#cbb8ac;padding:4px 0}
+footer a:hover{color:var(--gold)}
+.foot-brand p{color:#b7a89d;max-width:32ch;margin-top:10px;font-size:14.5px}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:34px;padding-top:18px;text-align:center;color:#9a8a7f;font-size:13.5px}
+
+/* ---------- Cart drawer ---------- */
+.overlay{position:fixed;inset:0;background:rgba(20,8,6,.55);backdrop-filter:blur(2px);z-index:200;opacity:0;visibility:hidden;transition:.25s}
+.overlay.open{opacity:1;visibility:visible}
+.drawer{
+  position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;background:var(--cream);z-index:210;
+  transform:translateX(105%);transition:transform .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:-20px 0 50px -20px rgba(0,0,0,.5);
+}
+.drawer.open{transform:translateX(0)}
+.drawer-head{background:var(--red-dark);color:#fff;padding:20px 22px;display:flex;align-items:center;justify-content:space-between}
+.drawer-head h3{font-size:24px}
+.drawer-close{width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.16);color:#fff;font-size:22px}
+.order-type{display:flex;gap:8px;padding:16px 22px 0}
+.order-type button{flex:1;min-height:46px;border-radius:12px;font-weight:700;background:#fff;box-shadow:inset 0 0 0 1.5px var(--line)}
+.order-type button[aria-pressed="true"]{background:var(--red);color:#fff;box-shadow:0 6px 14px -8px var(--red)}
+.cart-items{flex:1;overflow-y:auto;padding:16px 22px}
+.cart-empty{text-align:center;color:var(--ink-soft);padding:50px 10px}
+.cart-empty .big{font-family:'Anton';font-size:24px;color:var(--ink);margin-bottom:6px}
+.ci{display:flex;gap:12px;padding:14px 0;border-bottom:1px dashed var(--line)}
+.ci .thumb{width:62px;height:62px;border-radius:12px;flex:none}
+.ci .thumb .media{height:100%;border-radius:12px}
+.ci-info{flex:1;min-width:0}
+.ci-info b{font-weight:800;font-size:15px;display:block;line-height:1.2}
+.ci-info .ci-price{color:var(--red-dark);font-weight:800;font-family:'Manrope'}
+.qty{display:inline-flex;align-items:center;gap:0;background:#fff;border-radius:10px;box-shadow:inset 0 0 0 1.5px var(--line);margin-top:8px}
+.qty button{width:34px;height:34px;font-size:18px;font-weight:800;color:var(--red)}
+.qty span{min-width:26px;text-align:center;font-weight:800}
+.ci-remove{background:none;color:var(--ink-soft);font-size:13px;font-weight:700;margin-top:6px;text-decoration:underline}
+.cart-foot{padding:18px 22px;background:#fff;border-top:1px solid var(--line)}
+.cart-line{display:flex;justify-content:space-between;margin-bottom:8px;font-size:15px;color:var(--ink-soft)}
+.cart-total{display:flex;justify-content:space-between;align-items:baseline;margin:6px 0 16px}
+.cart-total b{font-family:'Anton';font-size:30px;color:var(--red-dark)}
+.cart-total span{font-weight:700}
+
+/* ---------- Checkout modal ---------- */
+.modal{
+  position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;padding:18px;
+  background:rgba(20,8,6,.6);backdrop-filter:blur(3px);
+}
+.modal.open{display:flex}
+.modal-card{background:var(--cream);border-radius:22px;max-width:520px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:var(--shadow)}
+.modal-head{background:var(--red-dark);color:#fff;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0}
+.modal-head h3{font-size:24px}
+.modal-body{padding:24px}
+.pay-opts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:6px 0 14px}
+.pay-opt{border:1.5px solid var(--line);border-radius:14px;padding:16px;cursor:pointer;background:#fff;transition:.15s;text-align:center}
+.pay-opt[aria-pressed="true"]{border-color:var(--red);box-shadow:0 0 0 3px rgba(215,38,30,.14);background:#fff}
+.pay-opt .ic{width:42px;height:42px;margin:0 auto 8px;border-radius:11px;background:var(--cream);color:var(--red);display:grid;place-items:center}
+.pay-opt b{display:block;font-size:15px}
+.pay-opt small{color:var(--ink-soft);font-size:12.5px}
+.card-fields{display:none;animation:fade .25s}
+.card-fields.show{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+.checkout-summary{background:#fff;border-radius:14px;padding:14px 16px;margin-bottom:16px;border:1px solid var(--line)}
+.checkout-summary .cs-row{display:flex;justify-content:space-between;font-size:14px;padding:3px 0;color:var(--ink-soft)}
+.checkout-summary .cs-tot{display:flex;justify-content:space-between;font-weight:800;color:var(--ink);border-top:1px dashed var(--line);margin-top:8px;padding-top:8px}
+.success{text-align:center;padding:14px}
+.success .check{width:84px;height:84px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;margin:0 auto 18px;font-size:44px;box-shadow:0 10px 30px -10px var(--green)}
+.success h3{font-size:30px;color:var(--ink);margin-bottom:8px}
+.success p{color:var(--ink-soft)}
+.success .code{font-family:'Anton';font-size:30px;color:var(--red);letter-spacing:2px;margin:14px 0}
+
+/* ---------- Lightbox ---------- */
+.lightbox{position:fixed;inset:0;z-index:400;background:rgba(10,4,3,.92);display:none;align-items:center;justify-content:center;padding:24px}
+.lightbox.open{display:flex}
+.lightbox .media{max-width:90vw;max-height:86vh;width:760px;aspect-ratio:3/2;border-radius:14px;box-shadow:var(--shadow)}
+.lightbox-close{position:absolute;top:20px;right:24px;color:#fff;font-size:38px;background:none}
+.toast{
+  position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(120%);
+  background:var(--ink);color:#fff;padding:14px 22px;border-radius:14px;font-weight:700;z-index:500;
+  box-shadow:var(--shadow);transition:transform .3s;display:flex;align-items:center;gap:10px;
+}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast .dot{width:10px;height:10px;border-radius:50%;background:var(--gold)}
+
+/* ---------- Responsive ---------- */
+@media (max-width:980px){
+  .hero-inner,.about-grid,.booking .wrap,.contact-grid{grid-template-columns:1fr}
+  .hero-art{height:300px;transform:none;order:-1}
+  .menu-grid{grid-template-columns:repeat(2,1fr)}
+  .gallery{grid-template-columns:repeat(2,1fr)}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  .nav-links{display:none}
+  .burger{display:grid}
+  .nav-links.open{
+    display:flex;flex-direction:column;position:absolute;top:var(--header-h);left:0;right:0;
+    background:var(--red-dark);padding:14px;gap:4px;box-shadow:var(--shadow);
+  }
+  .nav-links.open a{padding:14px}
+  .hide-sm{display:none}
+  .hero h1{font-size:40px}
+  .hero p.lead{font-size:16px;max-width:none}
+  .section-head h2{font-size:32px}
+  .menu-grid{grid-template-columns:1fr}
+  .gallery{grid-template-columns:1fr 1fr;grid-auto-rows:150px}
+  .gallery .g-item.tall{grid-row:span 1}
+  .foot-grid{grid-template-columns:1fr}
+  section{padding:54px 0}
+  .grid-2{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#home" class="brand" aria-label="Da Nicola, home">
+      <span class="mark">DN</span>
+      <span>Da Nicola<small>Savona · dal 1956</small></span>
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="Navigazione principale">
+      <a href="#home">Home</a>
+      <a href="#storia">La nostra storia</a>
+      <a href="#menu">Menu</a>
+      <a href="#prenota">Prenota</a>
+      <a href="#galleria">Galleria</a>
+      <a href="#contatti">Contatti</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="#prenota" class="btn btn-ghost hide-sm">Prenota un tavolo</a>
+      <button class="btn btn-primary cart-btn" id="openCart" aria-label="Apri il carrello">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+        <span class="hide-sm">Ordina</span>
+        <span class="cart-count" id="cartCount" hidden>0</span>
+      </button>
+      <button class="burger" id="burger" aria-label="Apri il menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== Hero ===== -->
+<section class="hero" id="home" style="padding:0">
+  <div class="wrap hero-inner">
+    <div>
+      <span class="eyebrow">🍕 Cucina ligure &amp; campana · Pizza napoletana</span>
+      <h1>Il gusto di <span class="out">Napoli</span><br>a due passi dal mare</h1>
+      <p class="lead">Dal 1956 a Savona portiamo in tavola pesce fresco, pasta fatta come a casa e la vera pizza napoletana. Ordina l'asporto o prenota il tuo tavolo.</p>
+      <div class="hero-cta">
+        <a href="#menu" class="btn btn-primary">Ordina online</a>
+        <a href="#prenota" class="btn btn-ghost">Prenota un tavolo</a>
+      </div>
+      <div class="hero-meta">
+        <div><b>1956</b>la nostra storia</div>
+        <div><b>100%</b>impasto a lunga lievitazione</div>
+        <div><b>★ 4,5</b>dicono di noi</div>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="hero-badge"><span>Da</span><span class="big">1956</span><span>Savona</span></div>
+      <div class="media" style="--g1:#e0392f;--g2:#7d0f0a">
+        <span class="media-label">La nostra Pizza Napoletana<small>impasto a lunga lievitazione</small></span>
+        <img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=900&q=80" alt="Pizza napoletana appena sfornata" loading="eager" onerror="this.style.display='none'">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== About / Storia ===== -->
+<section id="storia" class="bg-paper">
+  <div class="wrap about-grid">
+    <div class="about-imgs">
+      <div class="media" style="--g1:#9e140e;--g2:#6e0d09"><span class="media-label">La sala</span><img src="assets/img/int1.jpg" alt="La sala del ristorante sotto i mattoni a volta" loading="lazy" onerror="this.style.display='none'"></div>
+      <div class="media" style="--g1:#e8a33d;--g2:#b9772a"><span class="media-label">Il forno</span><img src="assets/img/int5.jpg" alt="Il banco della pizza e il forno" loading="lazy" onerror="this.style.display='none'"></div>
+      <div class="media" style="--g1:#1e8a4c;--g2:#125e32"><span class="media-label">I murales</span><img src="assets/img/int2.jpg" alt="I murales nella sala del ristorante" loading="lazy" onerror="this.style.display='none'"></div>
+    </div>
+    <div class="about-text">
+      <span class="section-head kick" style="display:block">La nostra storia</span>
+      <h2>Una famiglia, una cucina, dal 1956</h2>
+      <p style="color:var(--ink-soft);font-size:17px;margin-top:14px">Da Nicola è nato a Savona nel 1956, a pochi passi dal mare. Da allora cuciniamo come si faceva una volta: pesce fresco scelto ogni giorno, pasta tirata a mano e la pizza napoletana con impasto a lunga lievitazione e alta idratazione, leggera e digeribile.</p>
+      <p style="color:var(--ink-soft);font-size:17px;margin-top:14px">In tavola trovi due anime: la Liguria del pesto e del pesce, e la Campania di mamma Anna, con i suoi moscardini affogati in sugo piccante. Porzioni abbondanti, prodotti veri e l'accoglienza di sempre.</p>
+      <div class="feature-row">
+        <div><b>Pesce</b><span style="color:var(--ink-soft)">fresco tutti i giorni</span></div>
+        <div><b>Pizza</b><span style="color:var(--ink-soft)">napoletana verace</span></div>
+        <div><b>Dolci</b><span style="color:var(--ink-soft)">fatti in casa</span></div>
+      </div>
+      <p class="sig">Ti aspettiamo, come in famiglia.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Menu ===== -->
+<section id="menu">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kick">Il nostro menu</span>
+      <h2>Scegli e ordina</h2>
+      <p>Aggiungi i piatti al carrello per l'asporto o la consegna a domicilio. Paghi come preferisci: online o in contanti.</p>
+    </div>
+    <div class="menu-tabs" id="menuTabs" role="tablist"></div>
+    <div class="menu-grid" id="menuGrid"></div>
+    <p class="menu-note">Pizze classiche napoletane (Ø 22 cm). I piatti di pesce seguono il pescato del giorno. Per allergie e intolleranze chiedi al personale: abbiamo opzioni vegetariane e senza glutine.</p>
+  </div>
+</section>
+
+<!-- ===== Booking ===== -->
+<section id="prenota" class="booking">
+  <div class="wrap">
+    <div>
+      <span class="kick">Prenota online</span>
+      <h2>Il tuo tavolo Da Nicola</h2>
+      <p>Prenota in pochi secondi. Ti confermiamo noi per telefono o WhatsApp. Per gruppi numerosi e occasioni speciali scrivici, pensiamo a tutto noi.</p>
+      <div class="book-perk"><span class="ic">✓</span> Conferma rapida via telefono o WhatsApp</div>
+      <div class="book-perk"><span class="ic">✓</span> Tavoli per famiglie, coppie e gruppi</div>
+      <div class="book-perk"><span class="ic">✓</span> A due passi dal mare, nel cuore di Savona</div>
+      <p style="margin-top:22px"><b style="color:#fff;font-size:18px">Preferisci chiamare?</b><br><a href="tel:+393484543911" style="color:var(--gold);font-weight:800;font-size:20px">+39 348 4543911</a></p>
+    </div>
+    <form class="card-form" id="bookForm" novalidate>
+      <h3>Prenota un tavolo</h3>
+      <p style="color:var(--ink-soft);font-size:14px;margin-bottom:16px">I campi con <span style="color:var(--red)">*</span> sono obbligatori</p>
+      <div class="grid-2">
+        <div class="field" id="f-nome"><label>Nome e cognome <span class="req">*</span></label><input type="text" id="b-nome" autocomplete="name"><div class="err-msg">Inserisci il tuo nome</div></div>
+        <div class="field" id="f-tel"><label>Telefono <span class="req">*</span></label><input type="tel" id="b-tel" autocomplete="tel" inputmode="tel"><div class="err-msg">Inserisci un telefono valido</div></div>
+      </div>
+      <div class="grid-2">
+        <div class="field" id="f-data"><label>Data <span class="req">*</span></label><input type="date" id="b-data"><div class="err-msg">Scegli una data</div></div>
+        <div class="field" id="f-ora"><label>Ora <span class="req">*</span></label>
+          <select id="b-ora"><option value="">Scegli...</option><option>12:00</option><option>12:30</option><option>13:00</option><option>13:30</option><option>19:00</option><option>19:30</option><option>20:00</option><option>20:30</option><option>21:00</option><option>21:30</option></select>
+          <div class="err-msg">Scegli un orario</div></div>
+      </div>
+      <div class="field"><label>Numero di persone <span class="req">*</span></label>
+        <select id="b-pax"><option value="">Scegli...</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9+ (gruppo)</option></select></div>
+      <div class="field"><label>Note (allergie, occasioni, seggiolone...)</label><textarea id="b-note" placeholder="Scrivici tutto quello che ci serve sapere"></textarea></div>
+      <button type="submit" class="btn btn-red btn-block">Invia richiesta di prenotazione</button>
+      <div class="form-ok" id="bookOk"></div>
+    </form>
+  </div>
+</section>
+
+<!-- ===== Gallery ===== -->
+<section id="galleria" class="bg-paper">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kick">Galleria</span>
+      <h2>L'atmosfera Da Nicola</h2>
+      <p>Un giro tra la sala, il forno e i nostri piatti. Vieni a trovarci, l'aria di mare è inclusa.</p>
+    </div>
+    <div class="gallery" id="gallery"></div>
+  </div>
+</section>
+
+<!-- ===== Contact ===== -->
+<section id="contatti">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kick">Dove siamo</span>
+      <h2>Vieni a trovarci</h2>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <div class="info-card">
+          <div class="info-row"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span><div><b>Indirizzo</b><span>Via XX Settembre, 43 · 17100 Savona (SV)</span></div></div>
+          <div class="info-row"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><div><b>Telefono</b><span><a href="tel:+393484543911">+39 348 4543911</a> · <a href="tel:+390197706427">019 7706427</a></span></div></div>
+          <div class="info-row"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg></span><div><b>Email</b><span><a href="mailto:danicola.ristorante@gmail.com">danicola.ristorante@gmail.com</a></span></div></div>
+        </div>
+        <div class="info-card" style="margin-top:18px">
+          <b style="font-family:'Anton';font-size:20px;letter-spacing:.5px;display:block;margin-bottom:10px">Orari di apertura</b>
+          <div class="hours-li"><span>Lunedì</span><span>19:00 – 23:00</span></div>
+          <div class="hours-li closed"><span>Martedì</span><span>Chiuso</span></div>
+          <div class="hours-li"><span>Mercoledì – Giovedì</span><span>19:00 – 23:00</span></div>
+          <div class="hours-li"><span>Venerdì – Domenica</span><span>12:00 – 14:30 · 19:00 – 23:30</span></div>
+          <div class="socials">
+            <a href="https://www.facebook.com/" target="_blank" rel="noopener" class="s-fb" aria-label="Facebook"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H7v3h3v7h3v-7h3l1-3h-4v-2c0-.6.4-1 1-1z"/></svg></a>
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="s-ig" aria-label="Instagram"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+            <a href="https://wa.me/393484543911" target="_blank" rel="noopener" class="s-wa" aria-label="WhatsApp"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.4.7c-.1.1-.3.3-.1.6.1.3.6 1.1 1.4 1.8 1 .8 1.7 1.1 2 1.2.2.1.4.1.5-.1l.7-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.5.3.1.3.1.7-.1 1.1z"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div>
+        <a class="map-embed map-link" id="mapBox" href="https://www.google.com/maps/search/?api=1&query=44.3069,8.48008" target="_blank" rel="noopener" aria-label="Apri la posizione di Da Nicola su Google Maps">
+          <img src="assets/img/map.png" alt="Mappa con la posizione di Da Nicola in Via XX Settembre 43, Savona" loading="lazy">
+          <span class="map-tag"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Via XX Settembre, 43 · Savona</span>
+        </a>
+        <a class="btn btn-red btn-block" style="margin-top:14px" href="https://www.google.com/maps/dir/?api=1&destination=44.3069,8.48008" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          Come arrivare · Indicazioni stradali
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <div class="brand" style="color:#fff"><span class="mark">DN</span><span>Da Nicola<small>Savona · dal 1956</small></span></div>
+      <p>Ristorante Pizzeria a Savona. Cucina ligure e campana, pesce fresco e vera pizza napoletana, a due passi dal mare.</p>
+    </div>
+    <div>
+      <h4>Menu</h4>
+      <a href="#menu">Ordina online</a>
+      <a href="#prenota">Prenota un tavolo</a>
+      <a href="#galleria">Galleria</a>
+      <a href="#storia">La nostra storia</a>
+    </div>
+    <div>
+      <h4>Contatti</h4>
+      <a href="tel:+393484543911">+39 348 4543911</a>
+      <a href="mailto:danicola.ristorante@gmail.com">danicola.ristorante@gmail.com</a>
+      <a href="https://maps.google.com/?q=Via+XX+Settembre+43+Savona" target="_blank" rel="noopener">Via XX Settembre, 43 · Savona</a>
+    </div>
+  </div>
+  <div class="foot-bottom wrap">© 1956–2026 Ristorante Pizzeria Da Nicola · P.IVA da inserire · Sito realizzato con cura</div>
+</footer>
+
+<!-- ===== Cart Drawer ===== -->
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-label="Carrello" aria-hidden="true">
+  <div class="drawer-head">
+    <h3>Il tuo ordine</h3>
+    <button class="drawer-close" id="closeCart" aria-label="Chiudi carrello">×</button>
+  </div>
+  <div class="order-type" role="group" aria-label="Tipo di ordine">
+    <button id="otAsporto" aria-pressed="true">🥡 Asporto</button>
+    <button id="otConsegna" aria-pressed="false">🛵 Consegna</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot" id="cartFoot" hidden>
+    <div class="cart-line" id="deliveryLine" hidden><span>Consegna</span><span class="tnum">€ 3,00</span></div>
+    <div class="cart-total"><span>Totale</span><b class="tnum" id="cartTotal">€ 0,00</b></div>
+    <button class="btn btn-red btn-block" id="goCheckout">Vai al pagamento</button>
+  </div>
+</aside>
+
+<!-- ===== Checkout Modal ===== -->
+<div class="modal" id="checkout" role="dialog" aria-modal="true" aria-labelledby="coTitle">
+  <div class="modal-card">
+    <div class="modal-head"><h3 id="coTitle">Completa l'ordine</h3><button class="drawer-close" id="closeCheckout" aria-label="Chiudi">×</button></div>
+    <div class="modal-body" id="checkoutBody">
+      <div class="checkout-summary" id="coSummary"></div>
+      <form id="checkoutForm" novalidate>
+        <div class="grid-2">
+          <div class="field" id="c-nome"><label>Nome <span class="req">*</span></label><input type="text" id="co-nome" autocomplete="name"><div class="err-msg">Campo obbligatorio</div></div>
+          <div class="field" id="c-tel"><label>Telefono <span class="req">*</span></label><input type="tel" id="co-tel" inputmode="tel" autocomplete="tel"><div class="err-msg">Telefono non valido</div></div>
+        </div>
+        <div class="field" id="c-ind" hidden><label>Indirizzo di consegna <span class="req">*</span></label><input type="text" id="co-ind" autocomplete="street-address"><div class="err-msg">Inserisci l'indirizzo</div></div>
+        <div class="field"><label>Orario di ritiro/consegna</label>
+          <select id="co-ora"><option>Il prima possibile</option><option>12:30</option><option>13:00</option><option>13:30</option><option>19:30</option><option>20:00</option><option>20:30</option><option>21:00</option></select></div>
+
+        <label style="font-weight:700;display:block;margin:6px 0 4px">Come vuoi pagare? <span class="req">*</span></label>
+        <div class="pay-opts" role="group" aria-label="Metodo di pagamento">
+          <button type="button" class="pay-opt" id="payCash" aria-pressed="false">
+            <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/></svg></span>
+            <b>Contanti</b><small>Paghi al ritiro o alla consegna</small>
+          </button>
+          <button type="button" class="pay-opt" id="payCard" aria-pressed="false">
+            <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span>
+            <b>Carta online</b><small>Pagamento sicuro adesso</small>
+          </button>
+        </div>
+        <div class="err-msg" id="payErr" style="margin-top:-6px;margin-bottom:8px">Scegli un metodo di pagamento</div>
+
+        <div class="card-fields" id="cardFields">
+          <div class="field" id="c-num"><label>Numero carta</label><input type="text" id="co-num" inputmode="numeric" placeholder="1234 5678 9012 3456" maxlength="19"><div class="err-msg">Numero carta non valido</div></div>
+          <div class="grid-2">
+            <div class="field" id="c-exp"><label>Scadenza</label><input type="text" id="co-exp" placeholder="MM/AA" maxlength="5"><div class="err-msg">MM/AA</div></div>
+            <div class="field" id="c-cvc"><label>CVC</label><input type="text" id="co-cvc" inputmode="numeric" placeholder="123" maxlength="4"><div class="err-msg">CVC non valido</div></div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-red btn-block" id="placeOrder" style="margin-top:6px">Conferma ordine</button>
+        <p style="font-size:12px;color:var(--ink-soft);text-align:center;margin-top:10px">Pagamento dimostrativo. In produzione si collega un circuito reale (Stripe, Nexi, PayPal).</p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Lightbox ===== -->
+<div class="lightbox" id="lightbox"><button class="lightbox-close" id="lbClose" aria-label="Chiudi">×</button><div class="media" id="lbMedia"></div></div>
+
+<!-- ===== Toast ===== -->
+<div class="toast" id="toast"><span class="dot"></span><span id="toastMsg">Aggiunto al carrello</span></div>
+
+<script>
+/* ============ MENU DATA ============ */
+// Foto reali del ristorante (assets/img) abbinate ai piatti; le altre usano foto rappresentative.
+const MENU=[
+ // ----- ANTIPASTI -----
+ {id:'a1',cat:'Antipasti',name:'Crudo e bufala',desc:'Crudo di montagna e mozzarella di bufala D.O.C.G. Semplice e di qualità.',price:10,g:['#e8a33d','#b9772a'],img:'https://images.unsplash.com/photo-1631379578550-7038263db699?w=700&q=80'},
+ {id:'a2',cat:'Antipasti',name:'Zizzona aversana',desc:'Servita con cazzilli e crudo di montagna. Mozzarella gigante da condividere.',price:30,special:true,g:['#e8a33d','#b9772a'],img:'https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=700&q=80'},
+ {id:'a3',cat:'Antipasti',name:'Cozze alla marinara',desc:'Cozze fresche con aglio, olio e prezzemolo. Un classico del nostro mare.',price:10,g:['#1e6f8a','#0f3d4d'],img:'https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?w=700&q=80'},
+ {id:'a4',cat:'Antipasti',name:'Zuppetta di totani, ceci e pomodorini',desc:'Totani e ceci in un brodetto di pomodorini, con crostini. Saporita.',price:12,g:['#b71d16','#6e0d09'],img:'assets/img/int3.jpg'},
+ {id:'a5',cat:'Antipasti',name:'Pizzette fritte',desc:'Con pomodoro, parmigiano e basilico. Fritte e leggere, croccanti fuori.',price:7,g:['#d7261e','#9e140e'],img:'assets/img/food2.jpg'},
+
+ // ----- PRIMI PIATTI -----
+ {id:'p1',cat:'Primi',name:'Spaghetti sciuè sciuè',desc:'Aglio, olio, peperoncino e pomodoro fresco passato. Veloce e saporito.',price:7,g:['#d7261e','#9e140e'],img:'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=700&q=80'},
+ {id:'p2',cat:'Primi',name:'Spaghetti carbonara',desc:'Carbonara, amatriciana o gricia. La tradizione romana, fatta bene.',price:8,g:['#e8a33d','#b9772a'],img:'https://images.unsplash.com/photo-1612874742237-6526221588e3?w=700&q=80'},
+ {id:'p3',cat:'Primi',name:'Spaghetti alle vongole',desc:'Vongole veraci, aglio, olio e prezzemolo. Mare in tavola.',price:14,g:['#1e6f8a','#0f3d4d'],img:'https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=700&q=80'},
+ {id:'p4',cat:'Primi',name:'Trofie al pesto e fagiolini',desc:'Il pesto fatto da noi su trofie fresche, con patate e fagiolini.',price:10,g:['#1e8a4c','#125e32'],img:'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=700&q=80'},
+ {id:'p5',cat:'Primi',name:'Trofie acciughe e olive',desc:'Trofie con acciughe, olive, capperi e pomodorini. Decisa e mediterranea.',price:12,g:['#1e8a4c','#125e32'],img:'https://images.unsplash.com/photo-1556761223-4c4282c73f77?w=700&q=80'},
+ {id:'p6',cat:'Primi',name:'Spaghetti o trofie del golfo',desc:'Frutti di mare del golfo: gamberi, cozze, vongole e calamari. La specialità.',price:18,special:true,g:['#b71d16','#6e0d09'],img:'assets/img/food3.jpg'},
+
+ // ----- SECONDI DI PESCE -----
+ {id:'s1',cat:'Secondi di pesce',name:'Acciughe fritte',desc:'Acciughe del mar Ligure infarinate e fritte al momento.',price:10,g:['#1e8a4c','#125e32'],img:'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=700&q=80'},
+ {id:'s2',cat:'Secondi di pesce',name:'Orata ai ferri',desc:'Orata fresca cotta alla griglia, semplice e leggera.',price:15,g:['#1e6f8a','#0f3d4d'],img:'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=700&q=80'},
+ {id:'s3',cat:'Secondi di pesce',name:'Orata alla ligure',desc:'Al forno con patate, olive e pomodorini. Profumo di Liguria.',price:18,g:['#1e6f8a','#0f3d4d'],img:'https://images.unsplash.com/photo-1535140728325-a4d3707eee61?w=700&q=80'},
+ {id:'s4',cat:'Secondi di pesce',name:'Fritto di totani',desc:'Totani freschi fritti, dorati e croccanti. Porzione abbondante.',price:12,g:['#e8a33d','#b9772a'],img:'https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=700&q=80'},
+ {id:'s5',cat:'Secondi di pesce',name:'Totanetti di mamma Anna',desc:'Affogati in salsa di pomodoro piccante: il simbolo della nostra cucina verace.',price:12,special:true,g:['#d7261e','#6e0d09'],img:'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=700&q=80'},
+
+ // ----- SECONDI DI CARNE -----
+ {id:'c1',cat:'Secondi di carne',name:'Salsiccia ai ferri',desc:'Salsiccia alla griglia, semplice e gustosa.',price:10,g:['#9e140e','#6e0d09'],img:'https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=700&q=80'},
+ {id:'c2',cat:'Secondi di carne',name:'Scaloppina di vitello',desc:'Al vino bianco o al limone. Tenera e delicata.',price:12,g:['#b9772a','#6e4012'],img:'https://images.unsplash.com/photo-1607330289024-1535c6b4e1c1?w=700&q=80'},
+ {id:'c3',cat:'Secondi di carne',name:'Carne alla pizzaiola',desc:'Vitello in sugo di pomodoro con aglio, origano, capperi e olive.',price:12,g:['#d7261e','#9e140e'],img:'https://images.unsplash.com/photo-1558030006-450675393462?w=700&q=80'},
+
+ // ----- CONTORNI -----
+ {id:'k1',cat:'Contorni',name:'Insalata mista',desc:'Mista, verde o di pomodori. Fresca di giornata.',price:4,g:['#1e8a4c','#125e32'],img:'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=700&q=80'},
+ {id:'k2',cat:'Contorni',name:'Patatine fritte',desc:'Patatine fritte croccanti.',price:4,g:['#e8a33d','#b9772a'],img:'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=700&q=80'},
+
+ // ----- PIZZE (Ø 22 cm) -----
+ {id:'z1',cat:'Pizze',name:'Marinara',desc:'Pomodoro, aglio, origano e basilico. La più semplice e antica.',price:4,g:['#d7261e','#6e0d09'],img:'https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?w=700&q=80'},
+ {id:'z2',cat:'Pizze',name:'Margherita',desc:'Pomodoro, mozzarella e basilico. La regina napoletana.',price:5,g:['#d7261e','#9e140e'],img:'https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=700&q=80'},
+ {id:'z3',cat:'Pizze',name:'Scarpariella',desc:'Pomodoro, aglio e parmigiano. Profumata e leggera.',price:5,g:['#d7261e','#9e140e'],img:'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=700&q=80'},
+ {id:'z4',cat:'Pizze',name:'Siciliana',desc:'Pomodoro, mozzarella, olive e origano.',price:6,g:['#d7261e','#6e0d09'],img:'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=700&q=80'},
+ {id:'z5',cat:'Pizze',name:'Napoletana',desc:'Pomodoro, mozzarella, acciughe e origano.',price:6,g:['#d7261e','#9e140e'],img:'https://images.unsplash.com/photo-1593504049359-74330189a345?w=700&q=80'},
+ {id:'z6',cat:'Pizze',name:'Romana',desc:'Pomodoro, mozzarella, acciughe, capperi, olive e origano.',price:6,g:['#d7261e','#6e0d09'],img:'https://images.unsplash.com/photo-1571066811602-716837d681de?w=700&q=80'},
+ {id:'z7',cat:'Pizze',name:'Pugliese',desc:'Pomodoro, mozzarella e cipolle.',price:6,g:['#d7261e','#9e140e'],img:'https://images.unsplash.com/photo-1604382355076-af4b0eb60143?w=700&q=80'},
+ {id:'z8',cat:'Pizze',name:'Würstel',desc:'Pomodoro, mozzarella e würstel. La preferita dai più piccoli.',price:6,g:['#d7261e','#6e0d09'],img:'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=700&q=80'},
+ {id:'z9',cat:'Pizze',name:'Prosciutto',desc:'Pomodoro, mozzarella e prosciutto cotto.',price:7,g:['#d7261e','#9e140e'],img:'https://images.unsplash.com/photo-1601924582970-9238bcb495d9?w=700&q=80'},
+ {id:'z10',cat:'Pizze',name:'Margherita con bufala',desc:'Pomodoro, mozzarella di bufala e basilico.',price:8,g:['#1e8a4c','#125e32'],img:'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=700&q=80'},
+ {id:'z11',cat:'Pizze',name:'New York',desc:'Pomodoro, mozzarella, würstel e patatine. Golosa e sfiziosa.',price:8,special:true,g:['#b71d16','#6e0d09'],img:'assets/img/food5.jpg'},
+ {id:'z12',cat:'Pizze',name:'Parmigiana',desc:'Pomodoro, mozzarella, melanzane grigliate, parmigiano e aglio.',price:8,g:['#1e8a4c','#125e32'],img:'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=700&q=80'},
+ {id:'z13',cat:'Pizze',name:'Ortolana',desc:'Pomodoro, mozzarella e verdure grigliate di stagione.',price:8,g:['#1e8a4c','#125e32'],img:'https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=700&q=80'},
+ {id:'z14',cat:'Pizze',name:'Prosciutto e funghi',desc:'Pomodoro, mozzarella, prosciutto e funghi.',price:8,g:['#d7261e','#9e140e'],img:'https://images.unsplash.com/photo-1601924921557-45e6dea0a157?w=700&q=80'},
+ {id:'z15',cat:'Pizze',name:'Salsiccia',desc:'Pomodoro, mozzarella e salsiccia.',price:8,g:['#d7261e','#6e0d09'],img:'https://images.unsplash.com/photo-1628840042765-356cda07504e?w=700&q=80'},
+ {id:'z16',cat:'Pizze',name:'Infernale',desc:'Pomodoro, mozzarella e salame piccante. Per chi ama il piccante.',price:8,g:['#d7261e','#9e140e'],img:'https://images.unsplash.com/photo-1628840042765-356cda07504e?w=700&q=80'},
+ {id:'z17',cat:'Pizze',name:'Calzone semplice',desc:'Pomodoro, mozzarella e prosciutto, chiuso al forno.',price:8,g:['#e8a33d','#b9772a'],img:'https://images.unsplash.com/photo-1536964549204-cce9eab227bd?w=700&q=80'},
+ {id:'z18',cat:'Pizze',name:'Quattro formaggi',desc:'Mozzarella, stracchino, gorgonzola e parmigiano.',price:8,g:['#e8a33d','#b9772a'],img:'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=700&q=80'},
+ {id:'z19',cat:'Pizze',name:'Capricciosa',desc:'Pomodoro, mozzarella, carciofini, olive, prosciutto e funghi.',price:9,g:['#d7261e','#9e140e'],img:'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=700&q=80'},
+ {id:'z20',cat:'Pizze',name:'Calzone farcito',desc:'Pomodoro, mozzarella, prosciutto, funghi e carciofini.',price:9,g:['#e8a33d','#b9772a'],img:'https://images.unsplash.com/photo-1536964549204-cce9eab227bd?w=700&q=80'},
+
+ // ----- DOLCI DELLA CASA -----
+ {id:'d1',cat:'Dolci',name:'Babà',desc:'Babà napoletano soffice, bagnato al rhum. Fatto in casa.',price:5,g:['#b9772a','#6e4012'],img:'https://images.unsplash.com/photo-1612203985729-70726954388c?w=700&q=80'},
+ {id:'d2',cat:'Dolci',name:'Pastiera',desc:'Grano, ricotta e fiori d\'arancio. La tradizione di Napoli.',price:5,g:['#e8a33d','#b9772a'],img:'https://images.unsplash.com/photo-1519915028121-7d3463d20b13?w=700&q=80'},
+ {id:'d3',cat:'Dolci',name:'Cannolo siciliano',desc:'Cialda croccante riempita al momento con ricotta dolce e pistacchio.',price:5,g:['#b71d16','#6e0d09'],img:'assets/img/food6.jpg'},
+ {id:'d4',cat:'Dolci',name:'Crema Da Nicola',desc:'Il dolce al cucchiaio della casa, servito nel vasetto. Ricetta di famiglia.',price:5,g:['#b71d16','#6e0d09'],img:'assets/img/food1.jpg'},
+
+ // ----- BEVANDE -----
+ {id:'b1',cat:'Bevande',name:'Acqua (1L)',desc:'Naturale o frizzante.',price:2,g:['#1e6f8a','#0f3d4d'],img:'https://images.unsplash.com/photo-1523362628745-0c100150b504?w=700&q=80'},
+ {id:'b2',cat:'Bevande',name:'Bibita in lattina',desc:'Cola, aranciata, chinotto e altre.',price:3,g:['#d7261e','#9e140e'],img:'https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=700&q=80'},
+ {id:'b3',cat:'Bevande',name:'Birra',desc:'Alla spina o in bottiglia, chiedi la selezione.',price:5,g:['#e8a33d','#b9772a'],img:'https://images.unsplash.com/photo-1608270586620-248524c67de9?w=700&q=80'},
+ {id:'b4',cat:'Bevande',name:'Calice di vino della casa',desc:'Bianco ligure o rosso campano, chiedi al personale.',price:4,g:['#6e0d09','#3d0704'],img:'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=700&q=80'},
+];
+
+const GALLERY=[
+ {label:'La sala storica',cap:'La nostra sala sotto i mattoni a volta',cls:'wide',g:['#9e140e','#6e0d09'],img:'assets/img/int1.jpg'},
+ {label:'I murales',cap:'I dipinti che raccontano Da Nicola',cls:'tall',g:['#1e8a4c','#125e32'],img:'assets/img/int2.jpg'},
+ {label:'Il banco della pizza',cap:'Il forno e il nostro pizzaiolo',cls:'',g:['#e8a33d','#b9772a'],img:'assets/img/int5.jpg'},
+ {label:'Spaghetti del golfo',cap:'Frutti di mare del golfo',cls:'',g:['#b71d16','#6e0d09'],img:'assets/img/food3.jpg'},
+ {label:'I sapori del mare',cap:'Sapori di mare nel piatto',cls:'',g:['#1e6f8a','#0f3d4d'],img:'assets/img/food4.jpg'},
+ {label:'I mosaici della sala',cap:'I mosaici colorati sotto le volte',cls:'wide',g:['#d7261e','#9e140e'],img:'assets/img/food7r.jpg'},
+ {label:'Pizza New York',cap:'La nostra golosa pizza con patatine',cls:'',g:['#b71d16','#6e0d09'],img:'assets/img/food5.jpg'},
+];
+
+/* ============ HELPERS ============ */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const eur=n=>'€ '+n.toFixed(2).replace('.',',');
+function mediaHTML(item,extra=''){
+  const lbl=item.name||item.label;
+  return `<div class="media" style="--g1:${item.g[0]};--g2:${item.g[1]}" ${extra}>
+    <span class="media-label">${lbl}${item.special?'<small>specialità della casa</small>':''}</span>
+    <img src="${item.img}" alt="${lbl}" loading="lazy" onerror="this.style.display='none'"></div>`;
+}
+
+/* ============ RENDER MENU ============ */
+const cats=[...new Set(MENU.map(m=>m.cat))];
+const tabsEl=$('#menuTabs'), gridEl=$('#menuGrid');
+let activeCat=cats[0];
+cats.forEach((c,i)=>{
+  const b=document.createElement('button');
+  b.textContent=c;b.setAttribute('role','tab');b.setAttribute('aria-selected',i===0);
+  b.onclick=()=>{activeCat=c;$$('#menuTabs button').forEach(x=>x.setAttribute('aria-selected',x===b));renderMenu();};
+  tabsEl.appendChild(b);
+});
+function renderMenu(){
+  gridEl.innerHTML=MENU.filter(m=>m.cat===activeCat).map(m=>`
+    <article class="dish">
+      <div style="position:relative">
+        ${m.special?'<span class="dish-badge">★ Specialità</span>':''}
+        ${m.cat==='Pizze'?'<span class="dish-tag">Napoletana</span>':''}
+        ${mediaHTML(m)}
+      </div>
+      <div class="dish-body">
+        <h3>${m.name}</h3>
+        <p>${m.desc}</p>
+        <div class="dish-foot">
+          <span class="price tnum">${m.price>0?eur(m.price):'<small>Prezzo '+(m.priceNote||'su richiesta')+'</small>'}</span>
+          ${m.price>0?`<button class="add" data-add="${m.id}">Aggiungi +</button>`:`<a class="add" href="tel:+393484543911">Chiama</a>`}
+        </div>
+      </div>
+    </article>`).join('');
+  $$('#menuGrid [data-add]').forEach(b=>b.onclick=()=>addToCart(b.dataset.add));
+}
+renderMenu();
+
+/* ============ RENDER GALLERY ============ */
+$('#gallery').innerHTML=GALLERY.map((g,i)=>`
+  <div class="g-item ${g.cls}" data-lb="${i}" tabindex="0" role="button" aria-label="Ingrandisci: ${g.cap}">
+    ${mediaHTML(g)}<span class="g-cap">${g.cap}</span></div>`).join('');
+$$('#gallery .g-item').forEach(el=>{
+  const open=()=>{const g=GALLERY[el.dataset.lb];$('#lbMedia').style.setProperty('--g1',g.g[0]);$('#lbMedia').style.setProperty('--g2',g.g[1]);
+    $('#lbMedia').innerHTML=`<span class="media-label">${g.label}</span><img src="${g.img}" alt="${g.cap}" onerror="this.style.display='none'">`;$('#lightbox').classList.add('open');};
+  el.onclick=open;el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}};
+});
+$('#lbClose').onclick=()=>$('#lightbox').classList.remove('open');
+$('#lightbox').onclick=e=>{if(e.target.id==='lightbox')$('#lightbox').classList.remove('open');};
+
+/* ============ CART ============ */
+let cart=JSON.parse(localStorage.getItem('dn_cart')||'[]');
+let orderType='asporto';
+const DELIVERY_FEE=3;
+const save=()=>localStorage.setItem('dn_cart',JSON.stringify(cart));
+function addToCart(id){
+  const m=MENU.find(x=>x.id===id);const ex=cart.find(c=>c.id===id);
+  if(ex)ex.qty++;else cart.push({id,name:m.name,price:m.price,qty:1,g:m.g,img:m.img});
+  save();renderCart();showToast(m.name+' aggiunto');pulse();
+}
+function changeQty(id,d){const c=cart.find(x=>x.id===id);if(!c)return;c.qty+=d;if(c.qty<=0)cart=cart.filter(x=>x.id!==id);save();renderCart();}
+function removeItem(id){cart=cart.filter(x=>x.id!==id);save();renderCart();}
+function subtotal(){return cart.reduce((s,c)=>s+c.price*c.qty,0);}
+function total(){return subtotal()+(orderType==='consegna'&&cart.length?DELIVERY_FEE:0);}
+function count(){return cart.reduce((s,c)=>s+c.qty,0);}
+function renderCart(){
+  const n=count(),cc=$('#cartCount');
+  cc.textContent=n;cc.hidden=n===0;
+  const items=$('#cartItems'),foot=$('#cartFoot');
+  if(!cart.length){items.innerHTML=`<div class="cart-empty"><div class="big">Carrello vuoto</div><p>Aggiungi i tuoi piatti preferiti dal menu.</p></div>`;foot.hidden=true;return;}
+  foot.hidden=false;
+  items.innerHTML=cart.map(c=>`<div class="ci">
+    <div class="thumb">${mediaHTML({name:c.name,g:c.g,img:c.img})}</div>
+    <div class="ci-info"><b>${c.name}</b><span class="ci-price tnum">${eur(c.price)}</span>
+      <div class="qty"><button data-m="${c.id}" aria-label="Riduci">−</button><span class="tnum">${c.qty}</span><button data-p="${c.id}" aria-label="Aumenta">+</button></div>
+      <br><button class="ci-remove" data-r="${c.id}">Rimuovi</button></div>
+    <div class="tnum" style="font-weight:800">${eur(c.price*c.qty)}</div></div>`).join('');
+  $$('#cartItems [data-p]').forEach(b=>b.onclick=()=>changeQty(b.dataset.p,1));
+  $$('#cartItems [data-m]').forEach(b=>b.onclick=()=>changeQty(b.dataset.m,-1));
+  $$('#cartItems [data-r]').forEach(b=>b.onclick=()=>removeItem(b.dataset.r));
+  $('#deliveryLine').hidden=orderType!=='consegna';
+  $('#cartTotal').textContent=eur(total());
+}
+function pulse(){const b=$('#openCart');b.animate([{transform:'scale(1)'},{transform:'scale(1.12)'},{transform:'scale(1)'}],{duration:300});}
+renderCart();
+
+/* order type */
+$('#otAsporto').onclick=()=>{orderType='asporto';$('#otAsporto').setAttribute('aria-pressed',true);$('#otConsegna').setAttribute('aria-pressed',false);renderCart();};
+$('#otConsegna').onclick=()=>{orderType='consegna';$('#otConsegna').setAttribute('aria-pressed',true);$('#otAsporto').setAttribute('aria-pressed',false);renderCart();};
+
+/* drawer open/close */
+const drawer=$('#drawer'),overlay=$('#overlay');
+function openCart(){drawer.classList.add('open');overlay.classList.add('open');drawer.setAttribute('aria-hidden','false');}
+function closeCart(){drawer.classList.remove('open');overlay.classList.remove('open');drawer.setAttribute('aria-hidden','true');}
+$('#openCart').onclick=openCart;$('#closeCart').onclick=closeCart;
+overlay.onclick=()=>{closeCart();};
+
+/* toast */
+let toastT;function showToast(msg){$('#toastMsg').textContent=msg;const t=$('#toast');t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2200);}
+
+/* ============ BOOKING FORM ============ */
+const bForm=$('#bookForm');
+$('#b-data').min=new Date().toISOString().split('T')[0];
+function setErr(fieldId,on){$(fieldId).classList.toggle('field-err',on);}
+bForm.addEventListener('submit',e=>{
+  e.preventDefault();let ok=true;
+  const nome=$('#b-nome').value.trim(),tel=$('#b-tel').value.trim(),data=$('#b-data').value,ora=$('#b-ora').value,pax=$('#b-pax').value;
+  setErr('#f-nome',!nome);if(!nome)ok=false;
+  const telOk=/[0-9]{6,}/.test(tel.replace(/\s/g,''));setErr('#f-tel',!telOk);if(!telOk)ok=false;
+  setErr('#f-data',!data);if(!data)ok=false;
+  setErr('#f-ora',!ora);if(!ora)ok=false;
+  if(!pax){ok=false;}
+  if(!ok){const fe=bForm.querySelector('.field-err input,.field-err select');if(fe)fe.focus();return;}
+  const ok2=$('#bookOk');
+  ok2.innerHTML=`Grazie ${nome.split(' ')[0]}! Abbiamo ricevuto la tua richiesta per <b>${pax}</b> il <b>${data}</b> alle <b>${ora}</b>. Ti confermiamo a breve al <b>${tel}</b>.`;
+  ok2.classList.add('show');bForm.querySelector('button[type=submit]').textContent='Richiesta inviata ✓';
+  ok2.scrollIntoView({behavior:'smooth',block:'nearest'});
+});
+
+/* ============ CHECKOUT ============ */
+const modal=$('#checkout');let payMethod=null;
+$('#goCheckout').onclick=()=>{if(!cart.length)return;closeCart();buildSummary();modal.classList.add('open');};
+$('#closeCheckout').onclick=()=>modal.classList.remove('open');
+modal.onclick=e=>{if(e.target===modal)modal.classList.remove('open');};
+function buildSummary(){
+  $('#coSummary').innerHTML=cart.map(c=>`<div class="cs-row"><span>${c.qty}× ${c.name}</span><span class="tnum">${eur(c.price*c.qty)}</span></div>`).join('')
+    +(orderType==='consegna'?`<div class="cs-row"><span>Consegna</span><span class="tnum">${eur(DELIVERY_FEE)}</span></div>`:'')
+    +`<div class="cs-tot"><span>Totale (${orderType})</span><span class="tnum">${eur(total())}</span></div>`;
+  $('#c-ind').hidden=orderType!=='consegna';
+}
+$('#payCash').onclick=()=>{payMethod='cash';$('#payCash').setAttribute('aria-pressed',true);$('#payCard').setAttribute('aria-pressed',false);$('#cardFields').classList.remove('show');$('#payErr').classList.remove('show-err');$('#payErr').style.display='none';};
+$('#payCard').onclick=()=>{payMethod='card';$('#payCard').setAttribute('aria-pressed',true);$('#payCash').setAttribute('aria-pressed',false);$('#cardFields').classList.add('show');$('#payErr').style.display='none';};
+/* card input formatting */
+$('#co-num').oninput=e=>{e.target.value=e.target.value.replace(/\D/g,'').slice(0,16).replace(/(.{4})/g,'$1 ').trim();};
+$('#co-exp').oninput=e=>{let v=e.target.value.replace(/\D/g,'').slice(0,4);if(v.length>2)v=v.slice(0,2)+'/'+v.slice(2);e.target.value=v;};
+$('#co-cvc').oninput=e=>{e.target.value=e.target.value.replace(/\D/g,'').slice(0,4);};
+
+$('#checkoutForm').addEventListener('submit',e=>{
+  e.preventDefault();let ok=true;
+  const nome=$('#co-nome').value.trim(),tel=$('#co-tel').value.trim();
+  setErr('#c-nome',!nome);if(!nome)ok=false;
+  const telOk=/[0-9]{6,}/.test(tel.replace(/\s/g,''));setErr('#c-tel',!telOk);if(!telOk)ok=false;
+  if(orderType==='consegna'){const ind=$('#co-ind').value.trim();setErr('#c-ind',!ind);if(!ind)ok=false;}
+  if(!payMethod){$('#payErr').style.display='block';ok=false;}
+  if(payMethod==='card'){
+    const num=$('#co-num').value.replace(/\s/g,''),exp=$('#co-exp').value,cvc=$('#co-cvc').value;
+    setErr('#c-num',num.length<13);if(num.length<13)ok=false;
+    setErr('#c-exp',!/^\d{2}\/\d{2}$/.test(exp));if(!/^\d{2}\/\d{2}$/.test(exp))ok=false;
+    setErr('#c-cvc',cvc.length<3);if(cvc.length<3)ok=false;
+  }
+  if(!ok){const fe=$('#checkoutForm').querySelector('.field-err input');if(fe)fe.focus();return;}
+  // success
+  const code='DN'+Math.floor(1000+Math.random()*9000);
+  const payTxt=payMethod==='card'?'Pagamento con carta ricevuto':'Pagherai in contanti';
+  $('#checkoutBody').innerHTML=`<div class="success">
+    <div class="check">✓</div>
+    <h3>Ordine confermato!</h3>
+    <p>Grazie ${nome.split(' ')[0]}. ${payTxt}.</p>
+    <div class="code">${code}</div>
+    <p>Tipo: <b>${orderType==='consegna'?'Consegna a domicilio':'Ritiro / Asporto'}</b><br>Totale: <b>${eur(total())}</b></p>
+    <p style="margin-top:14px">Ti chiamiamo al <b>${tel}</b> per confermare i tempi.</p>
+    <button class="btn btn-red btn-block" style="margin-top:18px" onclick="location.reload()">Torna al menu</button>
+  </div>`;
+  cart=[];save();renderCart();
+});
+
+/* ============ NAV (mobile + active link) ============ */
+$('#burger').onclick=function(){const n=$('#navLinks');const o=n.classList.toggle('open');this.setAttribute('aria-expanded',o);};
+$$('#navLinks a').forEach(a=>a.onclick=()=>$('#navLinks').classList.remove('open'));
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeCart();modal.classList.remove('open');$('#lightbox').classList.remove('open');}});
+
+</script>
+</body>
+</html>
